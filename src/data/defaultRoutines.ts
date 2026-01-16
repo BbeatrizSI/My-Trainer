@@ -13,10 +13,10 @@ export const defaultRoutines: Routine[] = [
 				image: "/exercises/single-leg.png",
 			},
 			{
-				id: "back-leg-raise",
-				name: "Pierna levantada hacia atrás",
+				id: "lift-knees",
+				name: "Levantar rodillas",
 				seconds: 60,
-				image: "/exercises/pierna-atras.png",
+				image: "/exercises/high-leg.png",
 			},
 			{
 				id: "split-squat",
