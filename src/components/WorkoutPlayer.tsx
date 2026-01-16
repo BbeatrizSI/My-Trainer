@@ -318,7 +318,7 @@ export function WorkoutPlayer({
 									d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 								/>
 							</svg>
-							Empezar
+							Empezar!
 						</button>
 					) : (
 						<button
