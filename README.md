@@ -259,47 +259,12 @@ Los archivos se generarán en la carpeta `dist/`.
 
 ---
 
-## 🤝 Contribuir
-
-¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar My Trainer:
-
-1. **Fork** el proyecto
-2. **Crea una rama** para tu feature (`git checkout -b feature/AmazingFeature`)
-3. **Commit** tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** a la rama (`git push origin feature/AmazingFeature`)
-5. **Abre un Pull Request**
-
-### Ideas para Contribuir
-
-- 🎨 Nuevos temas de color o modo oscuro
-- 🏋️ Más ejercicios en el catálogo
-- 📊 Sistema de estadísticas y seguimiento
-- 🔊 Más opciones de audio (voces, diferentes sonidos)
-- 🌍 Internacionalización (i18n)
-- ♿ Mejoras de accesibilidad
-
----
-
-## 📝 Licencia
-
-Distribuido bajo la licencia MIT. Ver `LICENSE` para más información.
-
----
-
 ## 👤 Autor
 
 **Tu Nombre**
 
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
-- LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
-
----
-
-## 🙏 Agradecimientos
-
-- Imágenes de ejercicios inspiradas en recursos de fitness
-- Diseño de UI inspirado en las mejores prácticas de apps de fitness
-- Comunidad de React y Vite por las excelentes herramientas
+- GitHub: [@tu-usuario](https://github.com/BbeatrizSI)
+- LinkedIn: [Tu Perfil](https://linkedin.com/in/barbarabsacristan)
 
 ---
 
