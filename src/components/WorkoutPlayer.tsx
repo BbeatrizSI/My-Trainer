@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Routine } from "../types";
 import { beep } from "../lib/beep";
+import { getImagePath } from "../lib/imagePath";
 
 type Phase = "exercise" | "transition" | "finished";
 
@@ -253,7 +254,7 @@ export function WorkoutPlayer({
 					<div className="flex items-center justify-center">
 						<div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-white shadow-lg border-4 border-slate-200 overflow-hidden">
 							<img
-								src={current.image}
+								src={getImagePath(current.image)}
 								alt={current.name}
 								className="w-full h-full object-cover"
 								loading="lazy"

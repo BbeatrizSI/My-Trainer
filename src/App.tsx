@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import type { Routine } from "./types";
 import { loadRoutines, saveRoutines } from "./stores/routines";
 import { WorkoutPlayer } from "./components/WorkoutPlayer";
+import { getImagePath } from "./lib/imagePath";
 
 export default function App() {
 	const [routines, setRoutines] = useState<Routine[]>(() => loadRoutines());
@@ -227,7 +228,7 @@ export default function App() {
 																		<div className="flex items-center gap-3">
 																			<div className="w-24 h-24 rounded-full bg-slate-100 border-2 border-slate-200 overflow-hidden flex-shrink-0">
 																				<img
-																					src={ex.image}
+																					src={getImagePath(ex.image)}
 																					alt={ex.name}
 																					className="w-full h-full object-cover"
 																					loading="lazy"
