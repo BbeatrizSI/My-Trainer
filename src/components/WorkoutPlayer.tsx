@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Routine } from "../types";
 import { beep } from "../lib/beep";
-import { getImagePath } from "../lib/imagePath";
+import { PhaseBadge } from "./PhaseBadge";
+import { TimerDisplay } from "./TimerDisplay";
+import { ExerciseImage } from "./ExerciseImage";
+import { WorkoutControls } from "./WorkoutControls";
 
 type Phase = "exercise" | "transition" | "finished";
 
@@ -161,89 +164,27 @@ export function WorkoutPlayer({
 				<div className="w-20"></div>
 			</header>
 
-			<main className="flex-1 px-4 md:px-6 pb-4 md:pb-6 flex flex-col gap-6 max-w-4xl mx-auto w-full">
-				<div className="mt-6 rounded-2xl bg-white shadow-md border border-slate-200 p-6 md:p-8">
+			<main className="flex-1 px-3 md:px-6 pb-3 md:pb-6 flex flex-col gap-3 md:gap-6 max-w-4xl mx-auto w-full">
+				<div className="mt-3 md:mt-6 rounded-2xl bg-white shadow-md border border-slate-200 p-4 md:p-8">
 					<div className="flex items-center gap-2 mb-2">
-						{phase === "exercise" && (
-							<span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">
-								<svg
-									className="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M13 10V3L4 14h7v7l9-11h-7z"
-									/>
-								</svg>
-								Ejercicio
-							</span>
-						)}
-						{phase === "transition" && (
-							<span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">
-								<svg
-									className="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-									/>
-								</svg>
-								Transición
-							</span>
-						)}
-						{phase === "finished" && (
-							<span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
-								<svg
-									className="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-									/>
-								</svg>
-								Completado
-							</span>
-						)}
+						<PhaseBadge phase={phase} />
 					</div>
-					<div className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">
+					<div className="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900 mb-4 md:mb-6">
 						{title}
 					</div>
 
 					{phase !== "finished" && (
-						<>
-							<div className="text-7xl md:text-8xl font-bold tabular-nums bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-								{mm}:{ss}
-							</div>
-
-							<div className="h-3 rounded-full bg-slate-200 overflow-hidden shadow-inner">
-								<div
-									className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ease-linear"
-									style={{
-										width: `${progress * 100}%`,
-									}}
-								/>
-							</div>
-						</>
+						<TimerDisplay
+							minutes={mm}
+							seconds={ss}
+							progress={progress}
+						/>
 					)}
 
 					{phase === "finished" && (
-						<div className="text-center py-8">
-							<div className="text-6xl mb-4">🎉</div>
-							<div className="text-xl font-semibold text-slate-700">
+						<div className="text-center py-6 md:py-8">
+							<div className="text-5xl md:text-6xl mb-4">🎉</div>
+							<div className="text-lg md:text-xl font-semibold text-slate-700">
 								¡Rutina completada!
 							</div>
 						</div>
@@ -251,26 +192,14 @@ export function WorkoutPlayer({
 				</div>
 
 				{phase === "exercise" && current?.image && (
-					<div className="flex items-center justify-center">
-						<div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-white shadow-lg border-4 border-slate-200 overflow-hidden">
-							<img
-								src={getImagePath(current.image)}
-								alt={current.name}
-								className="w-full h-full object-cover"
-								loading="lazy"
-								onError={() =>
-									console.log("IMG ERROR:", current.image)
-								}
-							/>
-						</div>
-					</div>
+					<ExerciseImage src={current.image} alt={current.name} />
 				)}
 
 				{phase !== "finished" && next && (
 					<div className="rounded-2xl bg-white shadow-md border border-slate-200 p-4 md:p-5">
 						<div className="flex items-center gap-2 mb-2">
 							<svg
-								className="w-5 h-5 text-blue-600"
+								className="w-4 h-4 md:w-5 md:h-5 text-blue-600"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -286,102 +215,20 @@ export function WorkoutPlayer({
 								Siguiente
 							</div>
 						</div>
-						<div className="text-lg md:text-xl font-bold text-slate-900">
+						<div className="text-base md:text-lg lg:text-xl font-bold text-slate-900">
 							{next.name}
 						</div>
 					</div>
 				)}
 
-				<div className="mt-auto grid grid-cols-3 gap-3 md:gap-4">
-					{!running ? (
-						<button
-							className="col-span-2 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold active:scale-[0.99] shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
-							onClick={handleStart}
-							disabled={phase === "finished"}
-						>
-							<svg
-								className="w-5 h-5"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-								/>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-								/>
-							</svg>
-							Empezar
-						</button>
-					) : (
-						<button
-							className="col-span-2 py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold active:scale-[0.99] shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
-							onClick={() => setRunning(false)}
-						>
-							<svg
-								className="w-5 h-5"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
-								/>
-							</svg>
-							Pausa
-						</button>
-					)}
-
-					<button
-						className="py-4 rounded-2xl bg-white border-2 border-slate-300 text-slate-800 font-semibold active:scale-[0.99] shadow-sm hover:shadow-md hover:border-slate-400 transition-all duration-200 flex items-center justify-center gap-2"
-						onClick={skip}
-					>
-						<svg
-							className="w-5 h-5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M13 7l5 5m0 0l-5 5m5-5H6"
-							/>
-						</svg>
-						<span className="hidden sm:inline">Saltar</span>
-					</button>
-
-					<button
-						className="col-span-3 py-3 rounded-2xl bg-white border-2 border-slate-300 text-slate-700 font-semibold active:scale-[0.99] shadow-sm hover:shadow-md hover:border-slate-400 transition-all duration-200 flex items-center justify-center gap-2"
-						onClick={handleReset}
-					>
-						<svg
-							className="w-5 h-5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-							/>
-						</svg>
-						Reiniciar
-					</button>
-				</div>
+				<WorkoutControls
+					running={running}
+					finished={phase === "finished"}
+					onStart={handleStart}
+					onPause={() => setRunning(false)}
+					onSkip={skip}
+					onReset={handleReset}
+				/>
 			</main>
 		</div>
 	);
