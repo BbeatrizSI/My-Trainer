@@ -51,11 +51,20 @@ export function WorkoutPlayer({
 		return clearTick;
 	}, [running]);
 
+	// Pitidos en los últimos 3 segundos
+	useEffect(() => {
+		if (!running) return;
+		if (phase === "finished") return;
+		
+		// Pitar en 3, 2 y 1 segundo restante
+		if (remaining === 3 || remaining === 2 || remaining === 1) {
+			beep(880, 120);
+		}
+	}, [remaining, running, phase]);
+
 	useEffect(() => {
 		if (!running) return;
 		if (remaining > 0) return;
-
-		beep(880, 120);
 
 		if (phase === "exercise") {
 			if (index === routine.exercises.length - 1) {
@@ -136,7 +145,7 @@ export function WorkoutPlayer({
 		<div className="min-h-full bg-gradient-to-br from-slate-50 to-slate-100 text-slate-900 flex flex-col">
 			<header className="p-4 md:p-6 flex items-center justify-between border-b border-slate-200 bg-white/80 backdrop-blur-sm">
 				<button
-					className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-200 text-slate-800 hover:bg-slate-300 font-medium active:scale-[0.99] transition-all duration-200 shadow-sm"
+					className="flex items-center gap-2 px-2 py-2 rounded-xl bg-slate-200 text-slate-800 hover:bg-slate-300 font-medium active:scale-[0.99] transition-all duration-200 shadow-sm"
 					onClick={() => {
 						setRunning(false);
 						onExit();
@@ -158,7 +167,7 @@ export function WorkoutPlayer({
 					<span className="hidden sm:inline">Salir</span>
 				</button>
 
-				<div className="text-base md:text-lg font-semibold text-slate-900 truncate max-w-[60%]">
+				<div className="text-base md:text-lg ms-2 font-semibold text-slate-900 truncate max-w-[60%]">
 					{routine.name}
 				</div>
 				<div className="w-20"></div>
