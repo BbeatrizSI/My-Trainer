@@ -45,7 +45,6 @@ export function WorkoutPlayer({
 			1000
 		);
 		return clearTick;
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [running]);
 
 	useEffect(() => {
