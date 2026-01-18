@@ -201,11 +201,15 @@ export function WorkoutPlayer({
 				</div>
 
 				{phase === "exercise" && current?.image && (
-					<ExerciseImage src={current.image} alt={current.name} />
+					<div className="flex items-center justify-center">
+						<div className="w-52 h-52 flex items-center justify-center">
+							<ExerciseImage src={current.image} alt={current.name} />
+						</div>
+					</div>
 				)}
 
 				{phase !== "finished" && next && (
-					<div className="rounded-2xl bg-white shadow-md border border-slate-200 p-4 md:p-5">
+					<div className="rounded-2xl bg-white shadow-md border border-slate-200 p-3 ps-5 md:p-5">
 						<div className="flex items-center gap-2 mb-2">
 							<svg
 								className="w-4 h-4 md:w-5 md:h-5 text-blue-600"
